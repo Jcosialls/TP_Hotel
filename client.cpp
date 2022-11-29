@@ -17,5 +17,5 @@ std::string Client::lastname()const{
 } 
 
 void display_Client(Client client){
-    std::cout<< "Boujour " << client.firstname() << client.lastname() << std::endl;
+    std::cout<< "Boujour " << client.firstname() <<" "<< client.lastname() << std::endl;
 }
