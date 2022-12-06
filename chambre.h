@@ -14,6 +14,7 @@ class Chambre{
         int num()const;
         Type type()const;
         int price()const;
+		void setprice(int price);
 };
 
  void display_Chambre(Chambre chambre);

@@ -25,6 +25,12 @@ int Chambre::price()const{
     return _price;
 }
 
+void Chambre::setprice(int price) {
+	if (price >= 0)
+		_price = price;
+	else
+		std::cout << "prix entré non valide, entrer un prix valide"<<std::endl ;
+}
 
 void display_Chambre(Chambre chambre){
     std::cout<< "Chambre num " << chambre.num()<<"\tType de chambre : ";
