@@ -17,5 +17,6 @@ class Chambre{
 		void setprice(int price);
 };
 
- void display_Chambre(Chambre chambre);
+ std::string display_Chambre(Chambre chambre);
 
+ std::ostream& operator<<(std::ostream& os, const Chambre& chambre);

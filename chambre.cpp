@@ -32,20 +32,30 @@ void Chambre::setprice(int price) {
 		std::cout << "prix entré non valide, entrer un prix valide"<<std::endl ;
 }
 
-void display_Chambre(Chambre chambre){
-    std::cout<< "Chambre num " << chambre.num()<<"\tType de chambre : ";
+std::string display_Chambre(Chambre chambre){
+    std::string s = "Chambre num " + std::to_string(chambre.num()) +"\tType de chambre : ";
     switch(chambre.type()){
         case Type::Single :
-            std::cout<< "Chambre simple lit";
+            s += "Chambre simple lit";
             break;
         case Type::Double :
-            std::cout<< "Chambre double lit";
+			s += "Chambre double lit";
             break; 
         case Type::Suite :
-            std::cout<< "Suite";
+			s += "Suite";
             break;
         default:
             break;   
     }
-    std::cout<< "\tprix : "<< chambre.price()<<"euro(s)"<<std::endl;
+	s +="\tprix : "; 
+    s += chambre.price(); 
+    s += "euro(s)\n";
+    return s;
  }
+
+std::ostream& operator<<(std::ostream& os, const Chambre& chambre) {
+	std::string to_display;
+	to_display = display_Chambre(chambre);
+	os << to_display << std::endl;
+	return os;
+}

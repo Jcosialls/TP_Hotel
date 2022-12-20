@@ -13,6 +13,6 @@ class Client{
         std::string _lastname;
 
 }; 
-void display_Client(Client client);
+std::string display_Client(Client client);
 
-
+std::ostream& operator<<(std::ostream& os, Client client);
