@@ -9,11 +9,6 @@
 
 int main(){
 
-	//ecriture des clients
-    Client client1("JB", "Joshua", "De_Belfort");
-    display_Client(client1);
-	std::vector<Client> mes_clients = {client1};
-
 	//ecriture des chambres
     Chambre chambre0(0,Type::Single,100);
 	std::vector<Chambre> chambres = {chambre0,Chambre(1,Type::Single,100),Chambre(2,Type::Single,100),
@@ -27,12 +22,24 @@ int main(){
 	std::cout << Ibis;
 	std::vector<Hotel> mes_hotels = {Ibis};
 
+	
+	//ecriture des clients
+    Client client1("JB", "Joshua", "De_Belfort");
+    display_Client(client1);
+	std::vector<Client> mes_clients = {client1, Client("JC", "Julien", "COS"),
+									   Client("JPP", "Jean-Pierre", "Polnaref")};
+	entrerClient(mes_clients);
+
 	//ecriture d'une date
-	Date date1 = Date();
-	std::cout << date1;
+	entrerDate();
+
+	int nb_nuits;
+	std::cout<< "Entrer le nombre de nuits de votre séjour : ";
+	std::cin>> nb_nuits;
 
 	//ecriture d'une reservation
-	Reservation res1(date1, 7, mes_clients.at(0).id(), mes_hotels.at(0).id(), mes_hotels.at(0).chambres().at(0).num(), mes_hotels.at(0).chambres().at(0).price());
-
+	/*Reservation res1(date1, 7, mes_clients.at(0).id(), mes_hotels.at(0).id(), mes_hotels.at(0).chambres().at(0).num(), mes_hotels.at(0).chambres().at(0).price());
+	std::vector<Reservation> reservations = {res1};
+	*/
     return 0;
 }

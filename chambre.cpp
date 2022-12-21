@@ -48,8 +48,8 @@ std::string display_Chambre(Chambre chambre){
             break;   
     }
 	s +="\tprix : "; 
-    s += chambre.price(); 
-    s += "euro(s)\n";
+    s += std::to_string(chambre.price()); 
+    s += " euro(s)\n";
     return s;
  }
 

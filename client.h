@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 
 class Client{
     public:
@@ -16,3 +17,5 @@ class Client{
 std::string display_Client(Client client);
 
 std::ostream& operator<<(std::ostream& os, Client client);
+
+void entrerClient(std::vector<Client>& clients);
