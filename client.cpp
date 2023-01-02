@@ -29,20 +29,20 @@ std::ostream& operator<<(std::ostream& os, Client client) {
     return os;
 }
 
-void entrerClient(std::vector<Client>& clients){
-    std::cout<< "Entrer le nom du client : "<<std::endl;
+std::string entrerClient(std::vector<Client>& clients){
     std::string nom_client;
     bool exist = false;
+
+    std::cout<< "Entrer le nom du client : "<<std::endl;
     std::cin>> nom_client;
     for(auto i = 0; i< clients.size(); i++){
         if(nom_client == clients.at(i).lastname()){ //le client existe
             exist = true;
             std::cout<< clients.at(i);
-        }else{                                      //le client n'existe pas 
-            exist = false;                                 
-        }
+            return clients.at(i).id();
+        }else{}                                      //le client n'existe pas                                 
     }
-    if(exist != true){  //on crée un client
+    if(exist == false){  //on crée un client
         std::string id_client;
         std::string prenom_client;
         std::cout<< "Entrer l'identifient du client "<<std::endl;
@@ -52,6 +52,7 @@ void entrerClient(std::vector<Client>& clients){
         Client new_client(id_client,prenom_client,nom_client);
         clients.push_back(new_client);
         std::cout<< new_client;
+        return id_client;
     }
     
 }

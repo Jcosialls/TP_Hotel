@@ -1,5 +1,10 @@
 #pragma once 
+
+class Reservation;
+
 #include <iostream>
+#include <vector>
+#include "date.h"
 
 enum class Type{Single, Double, Suite}; 
 
@@ -20,3 +25,5 @@ class Chambre{
  std::string display_Chambre(Chambre chambre);
 
  std::ostream& operator<<(std::ostream& os, const Chambre& chambre);
+
+int rechercheChambre(Type type, int nights, Date date, std::vector<Chambre> chambres, std::vector<Reservation> reservations);

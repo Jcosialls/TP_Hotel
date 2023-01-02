@@ -18,4 +18,4 @@ std::string display_Client(Client client);
 
 std::ostream& operator<<(std::ostream& os, Client client);
 
-void entrerClient(std::vector<Client>& clients);
+std::string entrerClient(std::vector<Client>& clients);
