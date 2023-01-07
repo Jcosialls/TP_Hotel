@@ -8,13 +8,13 @@
 Chambre::Chambre(int num, Type type, int price):
     _num(num), _type(type), _price(price){
        bool status = isChambre(num,price);
-       if(status!=true)
+       if(status != true)
        assert(status && "Chambre is not valid"); 
     }
 
 bool Chambre::isChambre(int num, int price){
-    if(num <0)  return false;
-    if(price<0) return false;
+    if(num < 0)  return false;
+    if(price< 0) return false;
     return true;
 }    
 
@@ -32,39 +32,46 @@ void Chambre::setprice(int price) {
 	if (price >= 0)
 		_price = price;
 	else
-		std::cout << "prix entré non valide, entrer un prix valide"<<std::endl ;
+		std::cout<< "prix entré non valide, entrer un prix valide"<< std::endl ;
 }
 
-std::string display_Chambre(Chambre chambre){
-    std::string s = "Chambre num " + std::to_string(chambre.num()) +"\tType de chambre : ";
-    switch(chambre.type()){
-        case Type::Single :
-            s += "Chambre simple lit";
-            break;
-        case Type::Double :
-			s += "Chambre double lit";
-            break; 
-        case Type::Suite :
-			s += "Suite";
-            break;
-        default:
-            break;   
+
+//--------------Helper Functions-------------//
+Type search_Type(){
+    int val;
+    Type type;
+    std::cout<< "Quel type de chambre souhaitez-vous ?"<<std::endl;
+    std::cout<< "Entrer ''1'' pour une chambre simple"<<std::endl;
+    std::cout<< "Entrer ''2'' pour une chambre double"<<std::endl;
+    std::cout<< "Entrer ''3'' pour une suite"<<std::endl;
+    std::cin>> val;
+    while((val != 1) && (val != 2) && (val != 3)){
+        std::cout<< "Erreur, ressayez"<<std::endl;
+        std::cout<< "Quel type de chambre souhaitez-vous ?"<<std::endl;
+        std::cout<< "Entrer ''1'' pour une chambre simple"<<std::endl;
+        std::cout<< "Entrer ''2'' pour une chambre double"<<std::endl;
+        std::cout<< "Entrer ''3'' pour une suite"<<std::endl;
+        std::cin>> val;
     }
-	s +="\tprix : "; 
-    s += std::to_string(chambre.price()); 
-    s += " euro(s)\n";
-    return s;
- }
-
-std::ostream& operator<<(std::ostream& os, const Chambre& chambre) {
-	std::string to_display;
-	to_display = display_Chambre(chambre);
-	os << to_display << std::endl;
-	return os;
+    switch(val){
+        case 1 : 
+            type = Type::Single;
+            break;
+        case 2 :
+            type = Type::Double;
+            break;
+         case 3 :
+            type = Type::Suite;
+            break;
+        default :
+            std::cout<<"erreur"<<std::endl;
+            break;        
+    }
+    return type;
 }
 
-int rechercheChambre(Type type, int nights, Date date, std::vector<Chambre> chambres, std::vector<Reservation> reservations){
-    bool libre= false;
+int search_Chambre(Type type, int nights, Date date, std::vector<Chambre> chambres, std::vector<Reservation> reservations){
+    bool libre = false;
     std::vector<Chambre> chambres_du_bon_type;
     std::vector<Reservation> bonne_reservations;
     int numchambre_libre;
@@ -79,7 +86,7 @@ int rechercheChambre(Type type, int nights, Date date, std::vector<Chambre> cham
 
     //parmis les chambres du bon type, on regarde s'ils y en à qui sont réserver et on recupères ces réservations
     for(auto it1 = chambres_du_bon_type.begin(); it1 != chambres_du_bon_type.end(); it1++){ 
-        for(auto i=0; i<reservations.size(); i++){
+        for(auto i = 0; i < reservations.size(); i++){
             if(it1->num() == reservations.at(i).getnumchambre()){
                bonne_reservations.emplace_back(reservations.at(i));
             }
@@ -88,7 +95,7 @@ int rechercheChambre(Type type, int nights, Date date, std::vector<Chambre> cham
 
     //on regarde si la date des réservations coïncide avec la date entrée
     for(auto it1 = chambres_du_bon_type.begin(); it1 != chambres_du_bon_type.end(); it1++){
-        for(auto i=0; i<bonne_reservations.size(); i++){
+        for(auto i = 0; i < bonne_reservations.size(); i++){
             if(it1->num() == bonne_reservations.at(i).getnumchambre()){
                 if(date > (bonne_reservations.at(i).getbegin() + bonne_reservations.at(i).getnights())){
                     libre = true;
@@ -109,11 +116,42 @@ int rechercheChambre(Type type, int nights, Date date, std::vector<Chambre> cham
 
     if(libre==true){
         std::cout<< "la chambre n° " << std::to_string(numchambre_libre) << " est disponible" << std::endl;
-        std::cout<< "prix par nuit : " << std::to_string(prix_chambre) << "€" << std::endl;
-        std::cout<< "prix au total : " << std::to_string(prix_chambre*nights) << "€" << std::endl;
+        std::cout<< "prix par nuit : " << std::to_string(prix_chambre) << " euros" << std::endl;
+        std::cout<< "prix au total : " << std::to_string(prix_chambre*nights) << " euros\n" << std::endl;
         return numchambre_libre;
     }else{
         std::cout<< "aucune chambre trouvée" << std::endl;
         return -1;
     }
 }
+
+std::string display_Chambre(Chambre chambre){
+    std::string s = "Chambre num " + std::to_string(chambre.num()) + "\tType de chambre : ";
+    switch(chambre.type()){
+        case Type::Single :
+            s += "Chambre simple lit";
+            break;
+        case Type::Double :
+			s += "Chambre double lit";
+            break; 
+        case Type::Suite :
+			s += "Suite";
+            break;
+        default:
+            break;   
+    }
+	s += "\tprix par nuit : "; 
+    s += std::to_string(chambre.price()); 
+    s += " euros\n";
+    return s;
+ }
+
+//--------------Overloading Ops-------------//
+std::ostream& operator<<(std::ostream& os, const Chambre& chambre) {
+	std::string to_display;
+	to_display = display_Chambre(chambre);
+	os << to_display << std::endl;
+	return os;
+}
+
+

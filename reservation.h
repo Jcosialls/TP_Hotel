@@ -29,11 +29,15 @@ class Reservation {
 		void setbegin(int new_day, int new_month, int new_year);
 };
 
+//--------------Helper Functions-------------//
 void search_Res(int num,std::vector<Reservation> reservations);
-void search_Res(std::string id_or_name,std::vector<Reservation> reservations,std::vector<Client> clients);
-Reservation modify_Res(Reservation& res);
+void search_Res(std::string id_or_name,std::vector<Reservation> reservations,
+				std::vector<Client> clients);
+Reservation modify_Res(Reservation& res, std::vector<Client> clients,
+					   std::vector<Chambre> chambres, std::vector<Reservation> reservations);
 std::vector<Reservation> delete_Res(int num,std::vector<Reservation>& reservations);
-
 std::string display_Res(Reservation res);
-std::ostream& operator<<(std::ostream& os, const Reservation& res);
 void display_Reservations(std::vector<Reservation> reservations);
+
+//--------------Overloading Ops-------------//
+std::ostream& operator<<(std::ostream& os, const Reservation& res);

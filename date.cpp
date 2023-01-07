@@ -54,17 +54,17 @@ int Date::year()const {
 
  void Date::updateMonth(int month) {
     bool status = isDate(month, _day);
-    assert(status==true && "New month is not valid");
+    assert(status == true && "New month is not valid");
     _month = month;
 }
 
 void Date::updateDay(int day) {
         bool status = isDate(_month, day);
-        assert(status==true && "New day is not valid");
+        assert(status == true && "New day is not valid");
         _day = day;
     }
-//-----------fctons Helpers-------------//
 
+//--------------Helper Functions-------------//
 bool isDate(int day, int month){
 	if ((day < 1) || (day > 31))
 		return false;
@@ -81,7 +81,7 @@ bool isDate(int day, int month){
 }
 
 int getDaysInMonth(int month)  {
-    assert(((month >=1) && (month<=12)) && "Month is not valid");
+    assert(((month >= 1) && (month <= 12)) && "Month is not valid");
     if (month == 2) return 28;
     if ((month == 1 || month == 3 || month == 5 || month == 7
     || month == 8 || month == 10 || month == 12)) return 31;
@@ -89,36 +89,38 @@ int getDaysInMonth(int month)  {
 }
 
 std::string display_Date(Date date) {
-	std::string s = std::to_string(date.day()) + "/" + std::to_string(date.month()) + "/" + std::to_string(date.year()) + "\n";
+	std::string s = std::to_string(date.day()) + "/";
+	s += std::to_string(date.month()) + "/";
+	s += std::to_string(date.year()) + "\n";
 	return s;
 }
 
-Date entrerDate(){
-	int jour, mois, annee;
+Date enterDate(){
+	int day, month, year;
 	bool exist = false;
-		std::cout<< "Entrer uniquement le jour d'arrivé de votre séjour : ";
-		std::cin>> jour;
+		std::cout<< "Entrer uniquement le jour d'arrive de votre sejour : ";
+		std::cin>> day;
 		std::cout<< "Entrer le mois : ";
-		std::cin>> mois;
-		std::cout<< "Entrer l'année : ";
-		std::cin>> annee;
-		exist = isDate(jour,mois);
+		std::cin>> month;
+		std::cout<< "Entrer l'annee : ";
+		std::cin>> year;
+		exist = isDate(day,month);
 	while(exist!=true){
-		std::cout<< "Erreur, recommencez";
-		std::cout<< "Entrer uniquement le jour d'arrivé de votre séjour : ";
-		std::cin>> jour;
+		std::cout << "Erreur, recommencez" << std::endl;
+		std::cout<< "Entrer uniquement le jour d'arrive de votre sejour : ";
+		std::cin>> day;
 		std::cout<< "Entrer le mois : ";
-		std::cin>> mois;
-		std::cout<< "Entrer l'année : ";
-		std::cin>> annee;
-		exist = isDate(jour,mois);
+		std::cin>> month;
+		std::cout<< "Entrer l'annee : ";
+		std::cin>> year;
+		exist = isDate(day,month);
 	}
-	Date new_date(jour,mois,annee);
+	Date new_date(day,month,year);
 	std::cout << new_date;
 	return new_date;
 }
 
-//-----------operators-------------//
+//--------------Overloading Ops-------------//
 Date operator + (const Date& date, const int days) {
     if (days <0) { //if days <0, we call Date - (-days)
         return date - (-days);

@@ -21,13 +21,14 @@ class Date {
 		
 };
 
-//---------Fctons Helpers-----------//
+
+//--------------Helper Functions-------------//
 bool isDate(int day, int month);
 int getDaysInMonth(int month);
 std::string display_Date(Date date);
-Date entrerDate();
+Date enterDate();
 
-//-----------operators-------------//
+//--------------Overloading Ops-------------//
 bool operator == (const Date& d1, const Date& d2); // d1 == d2
 bool operator != (const Date& d1, const Date& d2); // d1 != d2
 bool operator < (const Date& d1, const Date& d2) ;  // d1 <  d2

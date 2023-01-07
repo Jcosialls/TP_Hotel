@@ -21,6 +21,9 @@ class Hotel{
 
 };
 
-//fonctions helper
+
+//--------------Helper Functions-------------//
 std::string display_Hotel(Hotel hotel);
+
+//--------------Overloading Ops-------------//
 std::ostream& operator<<(std::ostream& os, const Hotel& hotel);

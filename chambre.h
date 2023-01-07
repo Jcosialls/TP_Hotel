@@ -22,8 +22,11 @@ class Chambre{
 		void setprice(int price);
 };
 
- std::string display_Chambre(Chambre chambre);
+//--------------Helper Functions-------------//
+Type search_Type();
+int search_Chambre(Type type, int nights, Date date, std::vector<Chambre> chambres, std::vector<Reservation> reservations);
+std::string display_Chambre(Chambre chambre);
 
- std::ostream& operator<<(std::ostream& os, const Chambre& chambre);
+//--------------Overloading Ops-------------//
+std::ostream& operator<<(std::ostream& os, const Chambre& chambre);
 
-int rechercheChambre(Type type, int nights, Date date, std::vector<Chambre> chambres, std::vector<Reservation> reservations);

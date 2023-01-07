@@ -24,8 +24,7 @@ void Hotel::addchambre(Chambre chambre) {
 	_chambres.push_back(chambre);
 }
 
-
-// Fonction helper
+//--------------Helper Functions-------------//
 std::string display_Hotel(Hotel hotel) {
 	std::string s = hotel.id() + " : " + hotel.name() + " de " + hotel.city() + "\n";
 	for (auto i = 0; i < hotel.chambres().size(); i++) {
@@ -34,6 +33,7 @@ std::string display_Hotel(Hotel hotel) {
 	return s;
 }
 
+//--------------Overloading Ops-------------//
 std::ostream& operator<<(std::ostream& os, const Hotel& hotel) {
 	std::string to_display;
 	to_display = display_Hotel(hotel);

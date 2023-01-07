@@ -18,41 +18,49 @@ std::string Client::lastname()const{
     return _lastname;
 } 
 
-std::string display_Client(Client client){
-    std::string c = client.firstname() + " " + client.lastname() + " id : " + client.id();
-    return c;
+void Client::setid(std::string id){
+    _id = id;
 }
 
-std::ostream& operator<<(std::ostream& os, Client client) {
-    std::string to_display = display_Client(client);
-    os << to_display << std::endl;
-    return os;
-}
-
-std::string entrerClient(std::vector<Client>& clients){
-    std::string nom_client;
+//--------------Helper Functions-------------//
+std::string enter_Client(std::vector<Client>& clients){
+    std::string surname_client;
+    std::string id_client;
+    std::string name_client;
     bool exist = false;
 
     std::cout<< "Entrer le nom du client : "<<std::endl;
-    std::cin>> nom_client;
-    for(auto i = 0; i< clients.size(); i++){
-        if(nom_client == clients.at(i).lastname()){ //le client existe
+    std::cin>> surname_client;
+    for(auto it = clients.begin(); it != clients.end(); it++){
+        if(surname_client == it->lastname()){ //le client existe
             exist = true;
-            std::cout<< clients.at(i);
-            return clients.at(i).id();
+            std::cout<< *it;
+            return it->id();
         }else{}                                      //le client n'existe pas                                 
     }
     if(exist == false){  //on crée un client
-        std::string id_client;
-        std::string prenom_client;
-        std::cout<< "Entrer l'identifient du client "<<std::endl;
+        std::cout<< "Entrer l'identifient du client "<< std::endl;
         std::cin>> id_client;
-        std::cout<< "Entrer le prenom du client "<<std::endl;
-        std::cin>> prenom_client;
-        Client new_client(id_client,prenom_client,nom_client);
+        std::cout<< "Entrer le prenom du client "<< std::endl;
+        std::cin>> name_client;
+        Client new_client(id_client,name_client,surname_client);
         clients.push_back(new_client);
         std::cout<< new_client;
         return id_client;
     }
     
 }
+
+std::string display_Client(Client client){
+    std::string c = client.firstname() + " " + client.lastname() + " id : " + client.id();
+    return c;
+}
+
+
+//--------------Overloading Ops-------------//
+std::ostream& operator<<(std::ostream& os, Client client) {
+    std::string to_display = display_Client(client);
+    os << to_display << std::endl;
+    return os;
+}
+
